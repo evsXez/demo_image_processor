@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ImageProcessor</string>
+    <string name="filter_rotate">Rotate</string>
+    <string name="filter_invert">Invert</string>
+    <string name="filter_mirror">Mirror</string>
+    <string name="clear">CLEAR</string>
+    <string name="ask_clear">Clear history?</string>
+    <string name="ask_use_item">Use this item as source?</string>
+    <string name="ok">OK</string>
+    <string name="camera">Camera</string>
+    <string name="cannot_connect_to_camera">Cannot connect to camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="url">URL</string>
+    <string name="ask_change_image">Change image?</string>
+    <string name="enter_url">Paste/type image URL</string>
+    <string name="paste">Paste</string>
+</resources>
