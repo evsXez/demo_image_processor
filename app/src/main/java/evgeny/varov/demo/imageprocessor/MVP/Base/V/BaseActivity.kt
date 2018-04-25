@@ -21,6 +21,11 @@ abstract class BaseActivity<P : IBasePresenter> : AppCompatActivity(), IBaseView
         presenter.viewAttached()
     }
 
+    override fun onDestroy() {
+        presenter.viewDetached()
+        super.onDestroy()
+    }
+
     fun app() = application as App
     fun appComponent() = app().appComponent
 

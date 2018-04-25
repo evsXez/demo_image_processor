@@ -31,6 +31,11 @@ abstract class BaseFragment<P : IBasePresenter> : Fragment(), IBaseView
         daggerInject(appComponent())
     }
 
+    override fun onDetach() {
+        presenter.viewDetached()
+        super.onDetach()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.viewAttached()
@@ -40,17 +45,12 @@ abstract class BaseFragment<P : IBasePresenter> : Fragment(), IBaseView
     fun app() = activity?.application as App
     fun appComponent() = app().appComponent
 
-    override fun onDetach() {
-        super.onDetach()
-    }
 
     abstract fun init()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //if (inflater != null) {
-            root = inflater.inflate(getLayoutId(), container, false)
-        //}
+        root = inflater.inflate(getLayoutId(), container, false)
         return root
     }
 

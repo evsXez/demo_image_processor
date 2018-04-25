@@ -1,6 +1,7 @@
 package evgeny.varov.demo.imageprocessor.MVP.UI.Fragments.Controls
 
 import com.jakewharton.rxbinding2.view.clicks
+import com.jakewharton.rxbinding2.widget.checkedChanges
 import evgeny.varov.demo.imageprocessor.AppComponent
 import evgeny.varov.demo.imageprocessor.MVP.Base.V.BaseFragment
 import evgeny.varov.demo.imageprocessor.MVP.Data.FilterType.*
@@ -31,6 +32,8 @@ class View : BaseFragment<IPresenter>(), IView {
         button_invert.clicks().subscribe({ presenter.filterClicked(INVERT) })
         button_mirror.clicks().subscribe({ presenter.filterClicked(MIRROR) })
         button_clear.clicks().subscribe({ presenter.clearClicked() })
+        simulate_long_running.checkedChanges().subscribe({ changed -> presenter.simulateLongRunningChanged(changed) })
+        //TODO: unsibscribe from clicks/other ?
     }
 
     override fun askClearConfirmation(): Completable {

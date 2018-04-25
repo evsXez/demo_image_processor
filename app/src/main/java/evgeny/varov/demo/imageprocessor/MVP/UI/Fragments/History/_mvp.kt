@@ -15,7 +15,7 @@ import io.reactivex.Observable
 
 interface IView : IBaseView {
     fun prepareWithData(data: ArrayList<ImageRefModel>)
-    fun dataUpdated()
+    fun dataUpdated(pos: Int = -1)
     fun dataInserted()
     fun askUseThisItem(): Completable
 }

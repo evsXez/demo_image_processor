@@ -1,11 +1,12 @@
 package evgeny.varov.demo.imageprocessor.MVP.Base.P
 
 import android.support.annotation.CallSuper
+import evgeny.varov.demo.imageprocessor.MVP.Base.IBase
 
 /**
  * Created by evgeny on 16/02/2018.
  */
-interface IBasePresenter {
+interface IBasePresenter : IBase {
     @CallSuper
     fun viewAttached()
     @CallSuper

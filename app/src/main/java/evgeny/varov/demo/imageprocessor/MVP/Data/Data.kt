@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.media.Image
 import android.util.Log
+import com.chibatching.kotpref.KotprefModel
 import evgeny.varov.demo.imageprocessor.MVP.Data.Models.ImageModel
 import evgeny.varov.demo.imageprocessor.MVP.Data.Models.ImageRefModel
 import evgeny.varov.demo.imageprocessor.R
@@ -21,18 +22,25 @@ import java.util.*
  */
 class Data(val context: Context) {
 
+    //TODO: data is using directly
     //TODO: use repos (files/network/etc)
     private var tmp: ImageModel? = null
+
+    private object prefs : KotprefModel() {
+        var long_running: Boolean by booleanPref(false)
+    }
+
+    fun setLongRunningOps(long_running: Boolean) { prefs.long_running = long_running }
+    fun getLongRunningOps() = prefs.long_running
 
     fun imageLoaded(): Observable<ImageModel> {
         Log.d("Data", "Data: ${this.hashCode()}")
         return Observable.just(tmp ?: ImageModel(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher_round)))
     }
 
-    fun save(image: ImageModel): ImageRefModel {
+    fun save(image: ImageModel, ref: ImageRefModel): ImageRefModel {
         tmp = image
-        val ref = generateRef()
-        return saveToFile(image, ref)
+        return saveToFile(image, ref.ref)
     }
 
     fun history(): ArrayList<ImageRefModel> {
@@ -50,6 +58,8 @@ class Data(val context: Context) {
 
 
     private fun generateRef() = "${context.filesDir}/${System.currentTimeMillis()}"
+
+    fun newRef() = ImageRefModel(generateRef())
 
     private fun saveToFile(image: ImageModel, ref: String): ImageRefModel {
         FileOutputStream(ref).use {image.bmp.compress(Bitmap.CompressFormat.PNG, 100, it)}

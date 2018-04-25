@@ -1,6 +1,7 @@
 package evgeny.varov.demo.imageprocessor
 
 import android.app.Application
+import com.chibatching.kotpref.Kotpref
 import timber.log.Timber
 
 /**
@@ -11,6 +12,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        Kotpref.init(this)
         daggerPrepare()
         initTimber()
     }
@@ -42,3 +44,4 @@ class App : Application() {
         }
     }
 }
+

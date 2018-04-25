@@ -2,7 +2,7 @@ package evgeny.varov.demo.imageprocessor.MVP.UI.Fragments.Image
 
 import android.graphics.Bitmap
 import android.util.Log
-import evgeny.varov.demo.imageprocessor.MVP.Base.P.RxPresenter
+import evgeny.varov.demo.imageprocessor.MVP.Base.P.BasePresenter
 import evgeny.varov.demo.imageprocessor.MVP.Data.Models.ImageModel
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,7 +15,7 @@ import timber.log.Timber
 /**
  * Created by evgeny on 16/02/2018.
  */
-class Presenter(view: IView, model: IModel) : RxPresenter<IView, IModel>(view, model), IPresenter {
+class Presenter(view: IView, model: IModel) : BasePresenter<IView, IModel>(view, model), IPresenter {
 
     override val listen_to_events = true
 

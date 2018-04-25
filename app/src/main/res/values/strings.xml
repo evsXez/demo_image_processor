@@ -14,4 +14,5 @@
     <string name="ask_change_image">Change image?</string>
     <string name="enter_url">Paste/type image URL</string>
     <string name="paste">Paste</string>
+    <string name="simulate_long_running_filtering">Simulate long-running ops</string>
 </resources>

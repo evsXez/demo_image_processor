@@ -20,10 +20,12 @@ interface IView : IBaseView {
 interface IPresenter : IBasePresenter {
     fun filterClicked(type: FilterType)
     fun clearClicked()
+    fun simulateLongRunningChanged(long_running: Boolean)
 }
 
 interface IModel : IBaseModel {
     fun applyFilter(type: FilterType)
     fun clearHistory()
+    fun setLongRunningOps(long_running: Boolean)
 }
 

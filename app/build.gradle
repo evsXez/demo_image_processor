@@ -61,4 +61,7 @@ dependencies {
 
     //Timber
     implementation 'com.jakewharton.timber:timber:4.7.0'
+
+    //SharedPrefs
+    implementation 'com.chibatching.kotpref:kotpref:2.5.0'
 }

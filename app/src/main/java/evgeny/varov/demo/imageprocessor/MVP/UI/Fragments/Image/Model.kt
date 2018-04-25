@@ -59,6 +59,6 @@ class Model(logic: Logic, data: Data) : BaseModel(logic, data), IModel {
 
                 })
                 .map { b->ImageModel(b) }
-                .doOnEvent({image,err->data.save(image)})
+                .doOnEvent({image,err->data.save(image, data.newRef())})
     }
 }

@@ -1,7 +1,7 @@
 package evgeny.varov.demo.imageprocessor.MVP.UI.Fragments.History
 
 import android.util.Log
-import evgeny.varov.demo.imageprocessor.MVP.Base.P.RxPresenter
+import evgeny.varov.demo.imageprocessor.MVP.Base.P.BasePresenter
 import evgeny.varov.demo.imageprocessor.MVP.Data.FilterType
 import evgeny.varov.demo.imageprocessor.MVP.Data.Models.ImageModel
 import evgeny.varov.demo.imageprocessor.MVP.Data.Models.ImageRefModel
@@ -13,7 +13,7 @@ import org.greenrobot.eventbus.ThreadMode
 /**
  * Created by evgeny on 16/02/2018.
  */
-class Presenter(view: IView, model: IModel) : RxPresenter<IView, IModel>(view, model), IPresenter {
+class Presenter(view: IView, model: IModel) : BasePresenter<IView, IModel>(view, model), IPresenter {
 
     lateinit var data: ArrayList<ImageRefModel>
 
@@ -26,14 +26,21 @@ class Presenter(view: IView, model: IModel) : RxPresenter<IView, IModel>(view, m
         view.prepareWithData(data)
     }
 
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun event(image: ImageRefModel) {
         if (image.ref.length == 0) {
             data.clear()
             view.dataUpdated()
         } else {
-            data.add(0, image)
-            view.dataInserted()
+            val ref = data.find { it.ref == image.ref }
+            if (ref != null) {
+                ref.percent = image.percent
+                view.dataUpdated(data.indexOf(ref))
+            } else {
+                data.add(0, image)
+                view.dataInserted()
+            }
         }
 
     }

@@ -44,14 +44,24 @@ class View : BaseFragment<IPresenter>(), IView {
     override fun init() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.itemAnimator = DefaultItemAnimator()
+
 //        recyclerView.hasFixedSize()
     }
 
     override fun prepareWithData(data: ArrayList<ImageRefModel>) {
         recyclerView.adapter = HistoryAdapter(data)
     }
-    override fun dataUpdated() {
-        recyclerView.adapter.notifyDataSetChanged()
+    override fun dataUpdated(pos: Int) {
+        if (pos < 0)
+            recyclerView.adapter.notifyDataSetChanged()
+        else {
+            val animator = recyclerView.itemAnimator as DefaultItemAnimator
+//            animator.supportsChangeAnimations = false //fast update, no need blinking when animating
+            animator.supportsChangeAnimations = false
+
+            recyclerView.adapter.notifyItemChanged(pos)
+            //animator.supportsChangeAnimations = true
+        }
     }
 
     override fun dataInserted() {
@@ -78,21 +88,23 @@ class View : BaseFragment<IPresenter>(), IView {
             lay.clicks().subscribe({presenter.clickOnItem(adapterPosition)})
         }
 
-        fun View.hide() {this.visibility = View.GONE}
+        fun View.hide() {this.visibility = View.INVISIBLE} //no layout change
         fun View.show() {this.visibility = View.VISIBLE}
 
         override fun bind(item: ImageRefModel, position: Int) {
+            val PROGRESS_MAX = 1000
+            progress.max = PROGRESS_MAX
 
-            //view.setBackgroundColor(if (position % 2 == 0) Color.TRANSPARENT else Color.LTGRAY)
-            image.show()
-            progress.show()
-            //info is always visible
-
-//            image.setImageBitmap(BitmapFactory.decodeFile(item.ref))
-            Glide.with(app())
-                    .load(item.ref)
-                    .into(image)
-            info.text = item.ref //"INFO HERE"
+            if (item.percent.full) {
+                progress.hide()
+                Glide.with(app())
+                        .load(item.ref)
+                        .into(image)
+            } else {
+                progress.show()
+                progress.progress = (item.percent.f*PROGRESS_MAX).toInt()
+                image.setImageDrawable(null)
+            }
         }
     }
 

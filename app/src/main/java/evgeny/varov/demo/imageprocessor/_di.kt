@@ -34,7 +34,10 @@ class AppModule(val context: Context) {
 }
 
 @Scope
-annotation class ActivityScope
+annotation class PerScreen
 
 @Scope
-annotation class FragmentScope
+annotation class PerActivity
+
+@Scope
+annotation class PerFragment
