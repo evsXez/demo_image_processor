@@ -1,4 +1,4 @@
-package evgeny.varov.demo.imageprocessor.MVP.UI.Activities.MainScreen
+package evgeny.varov.demo.imageprocessor.MVP.UI.Activities.InfoScreen
 
 import evgeny.varov.demo.imageprocessor.MVP.Base.P.BasePresenter
 import evgeny.varov.demo.imageprocessor.MVP.Base.P.BaseTestPresenter
@@ -23,8 +23,5 @@ class Presenter(model: IModel) : BaseTestPresenter<IView, IModel>(model), IPrese
         Timber.w("here $this")
     }
 
-    override fun menuInfoSelected() {
-        view?.navigateToInfo()
-    }
 }
 

@@ -15,4 +15,6 @@
     <string name="enter_url">Paste/type image URL</string>
     <string name="paste">Paste</string>
     <string name="simulate_long_running_filtering">Simulate long-running ops</string>
+    <string name="info">Info</string>
+    <string name="author">Author: Evgeny Varov\nDate: April 2018</string>
 </resources>

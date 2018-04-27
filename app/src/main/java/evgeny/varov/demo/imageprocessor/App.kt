@@ -2,7 +2,9 @@ package evgeny.varov.demo.imageprocessor
 
 import android.app.Application
 import com.chibatching.kotpref.Kotpref
+import evgeny.varov.demo.imageprocessor.MVP.UI.Activities.MainScreen.ScreenComponent
 import timber.log.Timber
+import kotlin.reflect.KClass
 
 /**
  * Created by evgeny on 16/02/2018.
@@ -19,6 +21,7 @@ class App : Application() {
 
     lateinit var appComponent: AppComponent
         private set
+    var screenComponent: BaseScreenComponent? = null
 
     fun daggerPrepare() {
         appComponent = DaggerAppComponent.builder()

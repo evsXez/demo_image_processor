@@ -6,12 +6,17 @@ import dagger.Module
 import dagger.Provides
 import evgeny.varov.demo.imageprocessor.MVP.Data.Data
 import evgeny.varov.demo.imageprocessor.MVP.Logic.Logic
+import evgeny.varov.demo.imageprocessor.MVP.UI.Activities.MainScreen.IPresenter
 import javax.inject.Scope
 import javax.inject.Singleton
 
 /**
  * Created by evgeny on 13/03/2018.
  */
+@Component
+interface BaseScreenComponent {
+}
+
 @Singleton
 @Component(modules = arrayOf(AppModule::class))
 interface AppComponent {
@@ -37,7 +42,7 @@ class AppModule(val context: Context) {
 annotation class PerScreen
 
 @Scope
-annotation class PerActivity
+annotation class PerView
 
 @Scope
 annotation class PerFragment

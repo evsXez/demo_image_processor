@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MVP.UI.Activities.InfoScreen.View" android:theme="@style/DialogTheme"/>
     </application>
 
 </manifest>

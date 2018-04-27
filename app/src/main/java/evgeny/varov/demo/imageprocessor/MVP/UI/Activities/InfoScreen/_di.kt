@@ -1,4 +1,4 @@
-package evgeny.varov.demo.imageprocessor.MVP.UI.Activities.MainScreen
+package evgeny.varov.demo.imageprocessor.MVP.UI.Activities.InfoScreen
 
 import dagger.Component
 import dagger.Module
